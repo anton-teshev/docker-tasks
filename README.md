@@ -3,7 +3,11 @@
 ## 1 Лекция
 Написать Dockerfile для frontend располагается в директории /frontend, собрать и запустить
 ### решение
-
+в каталоге task1
+```
+docker build -t "frontend" .
+docker run --network testapp --network-alias frontend -p 3000:3000 frontend
+```
 ## 2 Лекция
 Написать Dockerfile для backend который располагается в директории /lib_catalog(для сборки контейнера необходимо использовать файл /lib_catalog/requirements.txt), для работы backend необходим postgresql, т.е. необходимо собрать 2 контейнера:
 1. backend
