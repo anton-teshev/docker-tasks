@@ -12,18 +12,21 @@ docker run frontend -p 3000:3000 frontend
 Написать Dockerfile для backend который располагается в директории /lib_catalog(для сборки контейнера необходимо использовать файл /lib_catalog/requirements.txt), для работы backend необходим postgresql, т.е. необходимо собрать 2 контейнера:
 1. backend
 2. postgresql
+
+Осуществить сетевые настройки, для работы связки backend и postgresql
 ### решение
 - создать сеть (опционально) `docker network create testapp`
 - используя Dockerfile в каталоге task2 собрать котейнер базы данных `docker build -t my_db .`
 - используя Dockerfile в каталоге task2\lib_catalog собрать контейнер бэкенда `docker build -t backend .`
-- запустить контейнер БД, запустить контейнер бэкенда, запустить сервер **backend:8000** в контейнере 
+- запустить в созданной сети типа bridge контейнер БД, контейнер бэкенда
+- запустить сервер django **backend:8000** в контейнере бэкенда
 ```
 docker run --network testapp --network-alias database -dt -v /myvol:/var/lib/postgresql/data my_db
 docker run --network testapp --network-alias backend -dt -p 8000:8000 backend
 docker exec 8a89a039279e python manage.py runserver backend:8000
 ``` 
 
-Осуществить сетевые настройки, для работы связки backend и postgresql
+
 ## 3 Лекция
 Написать docker-compose.yaml, для всего проекта, собрать и запустить
 
