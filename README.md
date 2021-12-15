@@ -13,10 +13,10 @@ docker run frontend -p 3000:3000 frontend
 1. backend
 2. postgresql
 ### решение
-создать сеть (опционально) `docker network create testapp`
-используя Dockerfile в каталоге task2 собрать котейнер базы данных `docker build -t my_db .`
-используя Dockerfile в каталоге task2\lib_catalog собрать контейнер бэкенда `docker build -t backend .`
-запустить контейнер БД, запустить контейнер бэкенда, запустить сервер в контейнере 
+- создать сеть (опционально) `docker network create testapp`
+- используя Dockerfile в каталоге task2 собрать котейнер базы данных `docker build -t my_db .`
+- используя Dockerfile в каталоге task2\lib_catalog собрать контейнер бэкенда `docker build -t backend .`
+- запустить контейнер БД, запустить контейнер бэкенда, запустить сервер **backend:8000** в контейнере 
 ```
 docker run --network testapp --network-alias database -dt -v /myvol:/var/lib/postgresql/data my_db
 docker run --network testapp --network-alias backend -dt -p 8000:8000 backend
