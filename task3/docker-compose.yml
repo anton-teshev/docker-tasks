@@ -1,0 +1,36 @@
+version: "3.7"
+
+services:
+  my_backend2:
+    build:
+      context: ./lib_catalog
+    ports:
+      - "8000:8000"
+    command: python manage.py runserver backend:8000
+    networks:
+      testapp:
+        aliases:
+          - backend
+    depends_on:
+      - my_db2
+  my_db2:
+    build:
+      context: ./db
+    volumes:
+      - /myvol:/var/lib/postgresql/data
+    networks:
+      testapp:
+        aliases: 
+          - database
+  my_frontend2:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000"
+    networks:
+      testapp:
+        aliases:
+          - frontend
+networks:
+  testapp:
+
